@@ -36,5 +36,94 @@ namespace CumulativeProjectP1.Controllers
 
             return View(SelectedTeacher);
         }
+
+        //GET: /teacher/add
+
+        public ActionResult Add()
+        {
+            return View();
+        }
+
+        //POST: /teacher/create
+        public ActionResult Create(string teacherfname, string teacherlname, string employeenumber, decimal salary, DateTime hiredate)//,ADD the rest from add
+        {
+            Debug.WriteLine("trying to add teacher with name " + teacherfname);
+            
+            teacher NewTeacher = new teacher();
+            NewTeacher.teacherfname = teacherfname;
+            NewTeacher.teacherlname = teacherlname;
+            NewTeacher.employeenumber = employeenumber;
+            NewTeacher.salary = salary;
+            NewTeacher.hiredate = hiredate;
+
+
+
+
+            TeacherDataController MyController = new TeacherDataController();
+
+            MyController.AddTeacher(NewTeacher);
+            
+            //returns back to list of teachers
+            return RedirectToAction("list");
+        }
+
+        //GET: /Teacher/deleteConfirm/{id}
+        public ActionResult DeleteConfirm(int id)
+        {
+            TeacherDataController MyController = new TeacherDataController();
+            teacher SelectedTeacher = MyController.FindTeacher(id);
+
+            return View(SelectedTeacher);
+        }
+
+        //POST: /teacher/delete/{id}
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            TeacherDataController MyController = new TeacherDataController();
+            MyController.DeleteTeacher(id);
+
+            return RedirectToAction("list");
+        }
+        //GET: /teacher/Edit/{id}
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+
+            TeacherDataController MyController = new TeacherDataController();
+            teacher SelectedTeacher = MyController.FindTeacher(id);
+
+            return View(SelectedTeacher);
+        }
+
+        //POST: /teacher/Update/{id}
+        [HttpPost]
+        public ActionResult Update(int id, string teacherfname, string teacherlname, string employeenumber, decimal salary, DateTime hiredate) // ADD THE REST OF THE FEILDS
+        {
+            //recive info about the teacher
+            Debug.WriteLine("teacher info");
+            Debug.WriteLine(teacherfname);
+            Debug.WriteLine(teacherlname);
+
+            teacher updatedteacher = new teacher();
+            //add updated teacher information
+            updatedteacher.teacherfname = teacherfname;
+            updatedteacher.teacherlname = teacherlname;
+            updatedteacher.employeenumber = employeenumber;
+            updatedteacher.salary = salary;
+            updatedteacher.hiredate = hiredate;
+
+            TeacherDataController MyController = new TeacherDataController();
+            MyController.UpdateTeacher(id, updatedteacher);
+            //return back to show page to confirm the updates made
+            return RedirectToAction("Show/" + id);
+        }
+
+
+
+
+
+
+
     }
 }

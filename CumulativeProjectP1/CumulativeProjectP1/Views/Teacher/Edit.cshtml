@@ -1,0 +1,96 @@
+﻿@model CumulativeProjectP1.Models.teacher
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit Teacher Info</h2>
+<form method="post" action="/Teacher/Update/@Model.teacherid">
+    <div>
+        <label>Teacher First Name</label>
+        <input id="teacherfname" type="text" name="teacherfname" value="@Model.teacherfname"/>
+    </div>
+
+    <div>
+        <label>Teacher Last Name</label>
+        <input id="teacherlname" type="text" name="teacherlname" value="@Model.teacherlname"/>
+    </div>
+    <div>
+        <div>
+            <label>Teacher Employee Number </label>
+            <input id="employeenumber" type="text" name="employeenumber" value="@Model.employeenumber" />
+        </div>
+        <div>
+                <label>Teacher Salary</label>
+                <input id="salary" type="text" name="salary" value="@Model.salary" />
+        </div>
+        <div>
+            <label>Teacher Hire Date</label>
+            <input id="hiredate" type="datetime" name="hiredate" value="@Model.hiredate" />
+        </div>
+
+    </div>
+    <div>
+        <input id="submit" type="submit" value="Edit" />
+        <button ><a href="/teacher/show/@Model.teacherid">Back to Teacher</a></button>
+    </div>
+ 
+</form>
+
+
+<script>
+    //javascript for client side validation for the edit page
+
+    var fName = document.getElementById("teacherfname");
+    var lName = document.getElementById("teacherlname");
+    var eNum = document.getElementById("employeenumber");
+    var sal = document.getElementById("salary");
+    var hDate = document.getElementById("hiredate");
+    var submit = document.getElementById("submit");
+
+    submit.onclick = formSubmited;
+
+    function formSubmited() {
+
+        if (fName.value === "") {
+            fName.style.backgroundColor = "red";
+            fName.focus();
+            return false
+        } else {
+            fName.style.backgroundColor = "white";
+        }
+        if (lName.value === "") {
+            lName.style.backgroundColor = "red";
+            lName.focus();
+            return false
+        } else {
+            lName.style.backgroundColor = "white";
+        }
+
+        var empNum = /^T\d{3}$/;
+
+        if (eNum.value === "" || !empNum.test(eNum.value)) {
+            eNum.style.backgroundColor = "red";
+            eNum.focus();
+
+            return false
+        } else {
+            eNum.style.backgroundColor = "white";
+        }
+
+        if (sal.value === "" || sal.value < 15.30) {
+            sal.style.backgroundColor = "red";
+            sal.focus();
+            return false
+        } else {
+            sal.style.backgroundColor = "white";
+        }
+
+        if (hDate.value === "" ) {
+            hDate.style.backgroundColor = "red";
+            hDate.focus();
+            return false
+        } else {
+            hDate.style.backgroundColor = "white";
+        }
+    };
+</script>

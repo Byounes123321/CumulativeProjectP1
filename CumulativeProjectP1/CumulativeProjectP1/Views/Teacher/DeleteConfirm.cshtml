@@ -1,0 +1,36 @@
+﻿@model CumulativeProjectP1.Models.teaher
+@{
+    ViewBag.Title = "DeleteConfirm";
+}
+<style>
+    .delete-btn{
+       float:right;
+       color:red;
+    }
+    .go-back{
+        backgroud:blue;
+    }
+    .form{
+        font-size:18px;
+    }
+</style>
+<script>
+
+
+</script>
+<h2>Are you sure you want to permanently delete @Model.teacherfname @Model.teacherlname from the database</h2>
+<div class="form">
+    <p>Name: @Model.teacherfname @Model.teacherlname</p>
+    <p>Teacher ID: @Model.teacherid</p>
+    <p>Employee Number: @Model.employeenumber</p>
+    <p>Salary: @Model.salary</p>
+</div>
+<div >
+   <button class="go-back"><a href="/teacher/list">no take me back</a></button> 
+
+    <form class="delete-btn" action="/teacher/delete/@Model.teacherid" method="post">
+        <input type="submit" value="Confirm Delete" />
+    </form>
+</div>
+
+

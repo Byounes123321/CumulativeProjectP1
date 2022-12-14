@@ -1,9 +1,6 @@
 ﻿@model IEnumerable<CumulativeProjectP1.Models.teacher>
 
 <style>
-    .searchbar {
-
-    }
     .btn {
         color: blue;
     }
@@ -14,15 +11,18 @@
 
 <h2>List of all teachers</h2>
 
+
 <form method="GET" action="/Teacher/List">
     <input class="searchbar" size="40" type="text" name="search_key" id="search_key" placeholder="Search for teacher information..." />
     <button class="btn" value="Search">Search</button>
 </form>
-    <ol class="ol">*
-        @foreach(CumulativeProjectP1.Models.teacher teacher in Model)
-            {
-               <li class="list-el">
-                   <h4><a href="/Teacher/Show/@teacher.teacherid">@teacher.teacherfname @teacher.teacherlname</a></h4>
-               </li>
-            }
-    </ol>
+<button><a href="/teacher/add">+ add new teacher</a></button>
+
+<ol class="ol">
+    @foreach (CumulativeProjectP1.Models.teacher teacher in Model)
+    {
+        <li class="list-el">
+            <h4><a href="/Teacher/Show/@teacher.teacherid">@teacher.teacherfname @teacher.teacherlname</a></h4>
+        </li>
+    }
+</ol>
