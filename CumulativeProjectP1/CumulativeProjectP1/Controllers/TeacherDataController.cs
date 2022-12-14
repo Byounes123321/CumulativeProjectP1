@@ -269,6 +269,8 @@ namespace CumulativeProjectP1.Controllers
             //close the connection to the database
             conn.Close();
 
+            //connection closed
+
         }
 
 
